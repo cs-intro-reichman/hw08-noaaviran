@@ -155,7 +155,7 @@ class PlayList {
             return;
         }
 
-        int otherSize= other.getMaxSize();
+        int otherSize= other.getSize();
         size = size + otherSize;
         for (int i = size-otherSize-1; i < size; i++) {
             for (int j = 0; j < otherSize; j++) {
