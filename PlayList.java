@@ -204,8 +204,8 @@ class PlayList {
         
 
         for (int i = 0; i < size-1; i++) {
-            if (minIndex(i) != -1) {
-                int min = minIndex(i);
+            int min = minIndex(i);
+            if (min != -1) {
                 Track temp = tracks[i];
                 tracks[i] = tracks[min];
                 tracks[min] = temp; 
