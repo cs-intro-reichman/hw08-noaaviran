@@ -200,14 +200,22 @@ class PlayList {
     public void sortedInPlace() {
         // Uses the selection sort algorithm,  
         // calling the minIndex method in each iteration.
-        for (int i = 0; i < size; i++) {
-            int min = minIndex(i);
-            Track temp = tracks[min];
-            tracks[i]= tracks[min];
-            tracks[i] = temp;
+        
+        
+
+        for (int i = 0; i < size-1; i++) {
+            if (minIndex(i) != -1) {
+                int min = minIndex(i);
+                Track temp = tracks[i];
+                tracks[i] = tracks[min];
+                tracks[min] = temp; 
+            }
+            
+            
+        }
 
         }
 
 
     }
-}
+
