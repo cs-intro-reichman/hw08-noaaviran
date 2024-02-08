@@ -150,18 +150,40 @@ class PlayList {
     /** Adds all the tracks in the other list to the end of this list. 
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
-     public void add(PlayList other) {
-        if (size + other.getSize() > maxSize){
-            return;
-        }
+    // public void add(PlayList other) {
+      //  if (size + other.getSize() > maxSize){
+        //    return;
+       // }
 
-        int otherSize= other.getSize();
-        size = size + otherSize;
-        for (int i = size-otherSize-1; i < size; i++) {
-            for (int j = 0; j < otherSize; j++) {
-                tracks[i]= other.getTrack(j);
+        //int otherSize= other.getSize();
+        //size = size + otherSize;
+     //   for (int i = size-otherSize-1; i < size; i++) {
+       //     for (int j = 0; j < otherSize; j++) {
+         //       tracks[i]= other.getTrack(j);
+           // }
+      //  }
+   // }
+
+
+    public void add(PlayList other) {
+        int totalSize = size + other.getSize();
+        if (totalSize > maxSize) {
+            return; // Cannot add tracks if it exceeds maximum capacity
+        }
+    
+        int tracksToAdd = Math.min(other.getSize(), maxSize - size);
+        int otherIndex = 0;
+    
+        // Iterate over the tracks in the other playlist
+        for (int i = size; i < size + tracksToAdd; i++) {
+            Track track = other.getTrack(otherIndex++);
+            if (track != null) {
+                tracks[i] = track;
             }
         }
+    
+        // Update the size of the current playlist
+        size += tracksToAdd;
     }
 
     /** Returns the index in this list of the track that has the shortest duration,
