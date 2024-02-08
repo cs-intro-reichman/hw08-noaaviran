@@ -150,42 +150,22 @@ class PlayList {
     /** Adds all the tracks in the other list to the end of this list. 
      *  If the total size of both lists is too large, does nothing. */
     //// An elegant and terribly inefficient implementation.
-    // public void add(PlayList other) {
-      //  if (size + other.getSize() > maxSize){
-        //    return;
-       // }
-
-        //int otherSize= other.getSize();
-        //size = size + otherSize;
-     //   for (int i = size-otherSize-1; i < size; i++) {
-       //     for (int j = 0; j < otherSize; j++) {
-         //       tracks[i]= other.getTrack(j);
-           // }
-      //  }
-   // }
-
-
-    public void add(PlayList other) {
-        int totalSize = size + other.getSize();
-        if (totalSize > maxSize) {
-            return; // Cannot add tracks if it exceeds maximum capacity
+     public void add(PlayList other) {
+        if (size + other.getSize() > maxSize){
+            return;
         }
-    
-        int tracksToAdd = Math.min(other.getSize(), maxSize - size);
-        int otherIndex = 0;
-    
-        // Iterate over the tracks in the other playlist
-        for (int i = size; i < size + tracksToAdd; i++) {
-            Track track = other.getTrack(otherIndex++);
-            if (track != null) {
-                tracks[i] = track;
+
+        int otherSize= other.getSize();
+        size = size + otherSize;
+       for (int i = size-otherSize-1; i < size; i++) {
+            for (int j = 0; j < otherSize; j++) {
+                tracks[i]= other.getTrack(j);
             }
-        }
-    
-        // Update the size of the current playlist
-        size += tracksToAdd;
+      }
     }
 
+
+  
     /** Returns the index in this list of the track that has the shortest duration,
      *  starting the search in location start. For example, if the durations are 
      *  7, 1, 6, 7, 5, 8, 7, then min(2) returns 4, since this the index of the 
@@ -197,11 +177,11 @@ class PlayList {
             return -1;
         }
 
-        int minTime = 1000;
+        int minTime = tracks[start].getDuration();
         int minIndex= start;
 
-        for (int i = start  ; i < size; i++) {
-            if (tracks[i] != null && tracks[i].getDuration() < minTime){
+        for (int i = start+1  ; i < size; i++) {
+            if (tracks[i].getDuration() < minTime){
                 minTime = tracks[i].getDuration();
                 minIndex= i;
             } 
@@ -228,7 +208,7 @@ class PlayList {
             int min = minIndex(i);
 
                 Track temp = tracks[i];
-                tracks[i] = tracks[min];
+                tracks[i] = tracks[minIndex(i)];
                 tracks[min] = temp; 
             
         }
