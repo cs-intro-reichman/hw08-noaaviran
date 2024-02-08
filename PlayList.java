@@ -61,8 +61,9 @@ class PlayList {
         if(size == 0){
             return ;
         } else{
-            size = size-1;
+            
             tracks[size]=null;
+            size = size-1;
         }
     }
     
@@ -204,16 +205,16 @@ class PlayList {
         // calling the minIndex method in each iteration.
 
         
-        int indexOfMin = 0;
-         for (int i = 0; i < size; i++) {
-            Track temp = tracks[i];
-             indexOfMin = minIndex(i);
-             tracks[i] = tracks[minIndex(i)];
-             tracks[indexOfMin] = temp;
-  
-         }
-     }
+        for (int i = 0; i < size-1; i++) {
+            int min = minIndex(i);
 
+                Track temp = tracks[i];
+                tracks[i] = tracks[minIndex(i)];
+                tracks[min] = temp; 
+            
+        }
+
+        }
 
 
     }
