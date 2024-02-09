@@ -102,12 +102,12 @@ class PlayList {
         if (size == maxSize || i<0 || i>size +1 ){
             return false;
         } 
-        size++;
-        for(int j=size - 2; j >= i ; j--){
-            tracks[j]= tracks[j+1];
+        
+        for(int j=size ; j > i ; j--){
+            tracks[j]= tracks[j-1];
         }
         tracks[i]= track;
-       
+       size++;
         return true;
     }
      
